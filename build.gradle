@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'pmd'
+}
+
+java.sourceCompatibility "VERSION_11"
+java.targetCompatibility "VERSION_11"
+
+ext {
+    javaMainClass = 'RunEdgeConvert'
+}
+
+test {
+    testLogging.showStandardStreams = true
+}
+
+application {
+    mainClass = javaMainClass
+}
+
+repositories {
+    mavenCentral()
+}
+
+pmd {
+  ignoreFailures = true
+  consoleOutput = true
+  ruleSets = [
+	"category/java/errorprone.xml",
+	"category/java/performance.xml"
+	] 
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+	  testImplementation files('lib/hamcrest-core-1.3.jar')
+    implementation files('lib/junit-4.12.jar')
+    implementation files('lib/hamcrest-core-1.3.jar')
+}
